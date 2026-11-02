@@ -8,18 +8,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class AuthAccessTokenSchema extends BaseModel {
-  static $columns = [
-    'abilities',
-    'createdAt',
-    'expiresAt',
-    'hash',
-    'id',
-    'lastUsedAt',
-    'name',
-    'tokenableId',
-    'type',
-    'updatedAt',
-  ] as const
+  static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
   $columns = AuthAccessTokenSchema.$columns
   @column()
   declare abilities: string
@@ -39,6 +28,53 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare tokenableId: number
   @column()
   declare type: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class CategoriaSchema extends BaseModel {
+  static $columns = ['categoria', 'createdAt', 'id', 'updatedAt'] as const
+  $columns = CategoriaSchema.$columns
+  @column()
+  declare categoria: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class DirectoreSchema extends BaseModel {
+  static $columns = ['createdAt', 'director', 'id', 'updatedAt'] as const
+  $columns = DirectoreSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare director: string
+  @column({ isPrimary: true })
+  declare id: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class PeliculaSchema extends BaseModel {
+  static $columns = ['createdAt', 'duracion', 'id', 'idCategoria', 'idDirector', 'sinopsis', 'titulo', 'updatedAt'] as const
+  $columns = PeliculaSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare duracion: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare idCategoria: number
+  @column()
+  declare idDirector: number
+  @column()
+  declare sinopsis: string | null
+  @column()
+  declare titulo: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }
