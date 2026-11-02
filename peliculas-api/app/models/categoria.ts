@@ -4,6 +4,8 @@ import { CategoriaSchema } from '#database/schema'
 import Pelicula from './pelicula.js'
 
 export default class Categoria extends CategoriaSchema {
+  static table = 'categorias'
+
   @hasMany(() => Pelicula, {
     foreignKey: 'idCategoria',
   })

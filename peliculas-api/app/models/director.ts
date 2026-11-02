@@ -4,6 +4,8 @@ import { DirectoreSchema } from '#database/schema'
 import Pelicula from './pelicula.js'
 
 export default class Director extends DirectoreSchema {
+  static table = 'directores'
+
   @hasMany(() => Pelicula, {
     foreignKey: 'idDirector',
   })

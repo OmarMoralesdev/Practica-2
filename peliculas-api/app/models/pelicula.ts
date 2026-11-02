@@ -5,6 +5,8 @@ import Categoria from './categoria.js'
 import Director from './director.js'
 
 export default class Pelicula extends PeliculaSchema {
+  static table = 'peliculas'
+
   @belongsTo(() => Director, {
     foreignKey: 'idDirector',
   })

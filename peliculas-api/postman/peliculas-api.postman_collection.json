@@ -1,0 +1,256 @@
+{
+  "info": {
+    "_postman_id": "8e9b86f2-4c0c-4c7a-9fd8-4d4a9d8b8b31",
+    "name": "Peliculas API",
+    "description": "Coleccion CRUD para directores, categorias y peliculas.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3333/api/v1/catalogo"
+    },
+    {
+      "key": "directorId",
+      "value": "1"
+    },
+    {
+      "key": "categoriaId",
+      "value": "1"
+    },
+    {
+      "key": "peliculaId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Directores",
+      "item": [
+        {
+          "name": "Listar directores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/directores"
+          }
+        },
+        {
+          "name": "Crear director",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    pm.collectionVariables.set('directorId', pm.response.json().id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"director\": \"Christopher Nolan\"\n}"
+            },
+            "url": "{{baseUrl}}/directores"
+          }
+        },
+        {
+          "name": "Ver director",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/directores/{{directorId}}"
+          }
+        },
+        {
+          "name": "Actualizar director",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"director\": \"Christopher Nolan actualizado\"\n}"
+            },
+            "url": "{{baseUrl}}/directores/{{directorId}}"
+          }
+        },
+        {
+          "name": "Eliminar director",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/directores/{{directorId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categorias",
+      "item": [
+        {
+          "name": "Listar categorias",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/categorias"
+          }
+        },
+        {
+          "name": "Crear categoria",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    pm.collectionVariables.set('categoriaId', pm.response.json().id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"categoria\": \"Ciencia ficcion\"\n}"
+            },
+            "url": "{{baseUrl}}/categorias"
+          }
+        },
+        {
+          "name": "Ver categoria",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/categorias/{{categoriaId}}"
+          }
+        },
+        {
+          "name": "Actualizar categoria",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"categoria\": \"Ciencia ficcion actualizada\"\n}"
+            },
+            "url": "{{baseUrl}}/categorias/{{categoriaId}}"
+          }
+        },
+        {
+          "name": "Eliminar categoria",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/categorias/{{categoriaId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Peliculas",
+      "item": [
+        {
+          "name": "Listar peliculas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/peliculas"
+          }
+        },
+        {
+          "name": "Crear pelicula",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    pm.collectionVariables.set('peliculaId', pm.response.json().id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Interestelar\",\n  \"idDirector\": {{directorId}},\n  \"duracion\": 169,\n  \"idCategoria\": {{categoriaId}},\n  \"sinopsis\": \"Una mision espacial para encontrar un nuevo hogar para la humanidad.\"\n}"
+            },
+            "url": "{{baseUrl}}/peliculas"
+          }
+        },
+        {
+          "name": "Ver pelicula",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/peliculas/{{peliculaId}}"
+          }
+        },
+        {
+          "name": "Actualizar pelicula",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Interestelar actualizada\",\n  \"idDirector\": {{directorId}},\n  \"duracion\": 169,\n  \"idCategoria\": {{categoriaId}},\n  \"sinopsis\": \"Sinopsis actualizada.\"\n}"
+            },
+            "url": "{{baseUrl}}/peliculas/{{peliculaId}}"
+          }
+        },
+        {
+          "name": "Eliminar pelicula",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/peliculas/{{peliculaId}}"
+          }
+        }
+      ]
+    }
+  ]
+}
